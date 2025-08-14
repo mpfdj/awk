@@ -44,3 +44,7 @@ awk '{ gsub(/Maths/, "Wiskunde", $3) } { print }' marks_1.txt | column -t | spon
 
 # Pipe output to another linux command
 awk 'BEGIN { print "hello, world !!!" | "tr [a-z] [A-Z]" }'
+
+
+# Set 3th column to uppercase
+echo "hello world hello world" | awk '{ $3 = "aaa" toupper($3) "bbb"; print }'
