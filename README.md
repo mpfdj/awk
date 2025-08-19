@@ -48,3 +48,10 @@ awk 'BEGIN { print "hello, world !!!" | "tr [a-z] [A-Z]" }'
 
 # Set 3th column to uppercase
 echo "hello world hello world" | awk '{ $3 = "aaa" toupper($3) "bbb"; print }'
+
+
+# Regex (example with corporate keys)
+sort /etc/passwd | awk -F ':' '/^[a-z]{2}[0-9]{2}[a-z]{2}/ { $1 = toupper($1); match($1, /[0-9]{2}/); print $1 " " $5 " " substr($1, RSTART, RLENGTH) }'| sort -k2
+
+# Using reference groups
+sort /etc/passwd | awk -F ':' '/^[a-z]{2}[0-9]{2}[a-z]{2}/ { $1 = toupper($1); match($1, /([0-9]{2})/, arr); print $1 " " $5 " " arr[1] }'| sort -k2
